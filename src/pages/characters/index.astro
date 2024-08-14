@@ -1,0 +1,55 @@
+---
+import Layout from "@layouts/Layout.astro";
+import AgentCard  from "@components/AgentCard.astro";
+
+
+
+const agents = [
+    {
+        name: "Sage",
+        role: "Sentinel",
+        image: "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/58a180961a14beb631877921e647c233804853c1-616x822.png?auto=format&fit=fill&q=80&w=218",
+    },
+    {
+        name: "Jett",
+        role: "Duelist",
+        image: "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/d41286dc9017bf79c0b4d907b7a260c27b0adb69-616x822.png?auto=format&fit=fill&q=80&w=218",
+    },
+    {
+        name: "Breach",
+        role: "Initiator",
+        image: "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/e435c3378b7999a3338b408dbb5da8ba63f91150-616x822.png?auto=format&fit=fill&q=80&w=218",
+    },
+    {
+        name: "Killjoy",
+        role: "Sentinel",
+        image: "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/820d36d431fff77b1e1ece39ad6f007746bd31f6-616x822.png?auto=format&fit=fill&q=80&w=218",
+    }
+
+]
+
+---
+<Layout title="Agents">
+    <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+            <!-- text - start -->
+            <div class="mb-10 md:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+                    Agents
+                </h2>
+
+                <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+                    List of all agents in Valorant.
+                </p>
+            </div>
+            <!-- text - end -->
+
+            <div class="grid gap-x-4 gap-y-8 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-4 xl:grid-cols-6">
+                {agents.map ((agent, index) => (
+                    <AgentCard {...agent}  />
+                ))}
+                
+            </div>
+        </div>
+    </div>
+</Layout>

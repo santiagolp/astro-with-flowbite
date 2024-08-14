@@ -1,0 +1,41 @@
+---
+
+
+interface Props {
+	name: string;
+	role: string;
+	image: string;
+}
+
+const colors: { [key: string]: string } = {
+    Sentinel: "bg-green-500",
+    Duelist: "bg-red-500",
+    Initiator: "bg-blue-500",
+    Controller: "bg-yellow-500",
+}
+
+
+const { name, role, image } = Astro.props;
+
+---
+
+<div>
+    <a  href=`/characters/${name}` class="group relative mb-2 block h-full overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3 lg:w-48">
+      <img src={image} loading="lazy" alt={name} class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+
+      <div class="absolute left-0 bottom-2 flex gap-2">
+        
+        <span class={`rounded-lg px-3 mx-2 py-1.5 text-sm font-bold uppercase tracking-wider text-white ${colors[role]}`}>{role}</span>
+        
+      </div>
+    </a>
+
+    <div class="flex items-start justify-between gap-2 px-2">
+      <div class="flex flex-col">
+        <a href=`/characters/${name}` class="text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl">
+            <h2 transition:name=`${name}`>{name}</h2>
+        </a>
+        <span  class="text-gray-500">{role}</span>
+      </div>
+    </div>
+  </div>

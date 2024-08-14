@@ -1,0 +1,64 @@
+---
+import Layout from "@layouts/Layout.astro";
+const { username } = Astro.params;
+
+const response = await fetch(
+    `https://aimlabs.com/_next/data/lB4YfJ0WkDNBwvDAet7pd/en/leaderboards.json?username=${username}&period=all&weaponId=9mm&taskId=multishot`,
+);
+const data = await response.json();
+// console.log(data);
+
+/*
+{
+            "user_id": "779229973A788D8E",
+            "score": 82702,
+            "ended_at": "2021-04-03T16:40:58.173Z",
+            "task_id": "gridshot",
+            "task_mode": 0,
+            "client_id": "aimlab",
+            "weapon_id": "9mm",
+            "map_id": 0,
+            "task_duration": 60,
+            "targets": 247,
+            "kills": 244,
+            "shots_fired": 265,
+            "shots_hit": 244,
+            "shots_missed": 21,
+            "reaction_time": 243.41060807275,
+            "reaction_time_segments": [231.520298976524, 229.807229746943, 268.110134648342, 234.02456580268, 261.463192409939, 221.907216389974, 265.866795131138, 263.129946390788],
+            "accuracy": 92.07547,
+            "accuracy_segments": [96, 96, 84, 96, 90, 100, 88, 86],
+            "shots_per_kill": 1.08606557377049,
+            "kills_per_sec": 4.07330847,
+            "custom": {
+
+            },
+            "play_id": "ee10f691-9c25-4c97-be54-d711923010de",
+            "rank": 646343,
+            "username": "sanlp"
+          }
+
+*/
+
+const key =
+    "Trainer_AimlabLeaderboard:clientId=aimlab&metric=max_score&taskId=multishot&taskMode=0&taskVersion=1&weaponId=9mm";
+const realData = data.pageProps.APOLLO_STATE_PROP_NAME[key].data;
+---
+
+<Layout title={username ?? ""}>
+    <h2
+        transition:animate="slide"
+        class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl"
+    >
+        Aimlabs
+    </h2>
+    <p
+        class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg capitalize"
+    >
+        {data && data.pageProps.defaultFilters.username} - {
+            data && data.pageProps.defaultFilters.taskId
+        }
+        <br />
+        {realData[0]?.score ?? "No data found for this user"}
+    </p>
+</Layout>
